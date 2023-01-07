@@ -1,0 +1,17 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "services/**/*.ts",
+    "helpers/**/*.ts",
+    "consts/**/*.ts",
+    "test/**/*.ts",
+    "public-api.ts"
+  ]
+}
