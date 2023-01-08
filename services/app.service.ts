@@ -1,7 +1,7 @@
-import {hideAppSplashscreen} from '@tinijs/core';
+import {hideSplashscreen} from './app/hide-splashscreen';
 
 export class AppService {
-  hideSplashScreen() {
-    return hideAppSplashscreen();
+  hideSplashscreen() {
+    return hideSplashscreen();
   }
 }

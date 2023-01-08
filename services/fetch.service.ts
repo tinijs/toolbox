@@ -1,45 +1,37 @@
+import {fetch_} from './fetch/fetch';
+import {get} from './fetch/get';
+import {getText} from './fetch/get-text';
+import {post} from './fetch/post';
+import {put} from './fetch/put';
+import {patch} from './fetch/patch';
+import {delete_} from './fetch/delete';
+
 export class FetchService {
-  get<Data>(url: string, requestInit?: RequestInit) {
-    return this.fetch(
-      url,
-      {...requestInit, method: 'GET'},
-      true
-    ) as Promise<Data>;
+  get<Result>(url: string, requestInit?: RequestInit) {
+    return get<Result>(url, requestInit);
   }
 
   getText(url: string, requestInit?: RequestInit) {
-    return this.fetch(
-      url,
-      {...requestInit, method: 'GET'},
-      false
-    ) as Promise<string>;
+    return getText(url, requestInit);
   }
 
-  post<Data>(url: string, requestInit?: RequestInit) {
-    return this.fetch(url, {...requestInit, method: 'POST'}) as Promise<Data>;
+  post<Result>(url: string, requestInit?: RequestInit) {
+    return post<Result>(url, requestInit);
   }
 
-  put<Data>(url: string, requestInit?: RequestInit) {
-    return this.fetch(url, {...requestInit, method: 'PUT'}) as Promise<Data>;
+  put<Result>(url: string, requestInit?: RequestInit) {
+    return put<Result>(url, requestInit);
   }
 
-  patch<Data>(url: string, requestInit?: RequestInit) {
-    return this.fetch(url, {...requestInit, method: 'PATCH'}) as Promise<Data>;
+  patch<Result>(url: string, requestInit?: RequestInit) {
+    return patch<Result>(url, requestInit);
   }
 
-  delete<Data>(url: string, requestInit?: RequestInit) {
-    return this.fetch(url, {...requestInit, method: 'DELETE'}) as Promise<Data>;
+  delete<Result>(url: string, requestInit?: RequestInit) {
+    return delete_<Result>(url, requestInit);
   }
 
-  private async fetch(
-    input: RequestInfo,
-    requestInit?: RequestInit,
-    isJson = true
-  ) {
-    const response = await fetch(input, requestInit);
-    if (!response.ok) {
-      throw new Error('Fetch failed!');
-    }
-    return !isJson ? response.text() : response.json();
+  fetch(input: RequestInfo, requestInit?: RequestInit, isJson = true) {
+    return fetch_(input, requestInit, isJson);
   }
 }

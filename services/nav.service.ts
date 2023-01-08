@@ -1,5 +1,9 @@
 import {Router} from '@tinijs/router';
-import {showNavIndicator, hideNavIndicator} from '@tinijs/router';
+
+import {showIndicator} from './nav/show-indicator';
+import {hideIndicator} from './nav/hide-indicator';
+import {go} from './nav/go';
+import {back} from './nav/back';
 
 export class NavService {
   private _router?: Router;
@@ -14,18 +18,18 @@ export class NavService {
   }
 
   showIndicator() {
-    return showNavIndicator();
+    return showIndicator();
   }
 
   hideIndicator() {
-    return hideNavIndicator();
+    return hideIndicator();
   }
 
   go(pathnameOrContext: string) {
-    return this.ROUTER.render(pathnameOrContext);
+    return go(this.ROUTER, pathnameOrContext);
   }
 
   back() {
-    return history.back();
+    return back();
   }
 }
