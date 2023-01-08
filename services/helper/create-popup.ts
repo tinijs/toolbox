@@ -26,3 +26,6 @@ export function createPopup(config: PopupConfigs) {
     }
   }, 1000);
 }
+
+export default createPopup;
+export type CreatePopup = typeof createPopup;

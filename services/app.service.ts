@@ -5,3 +5,5 @@ export class AppService {
     return hideSplashscreen();
   }
 }
+
+export default AppService;

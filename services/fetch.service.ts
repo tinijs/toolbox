@@ -35,3 +35,5 @@ export class FetchService {
     return fetch_(input, requestInit, isJson);
   }
 }
+
+export default FetchService;

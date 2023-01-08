@@ -15,3 +15,5 @@ export class HelperService {
     return createPopup(configs);
   }
 }
+
+export default HelperService;

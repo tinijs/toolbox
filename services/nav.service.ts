@@ -33,3 +33,5 @@ export class NavService {
     return back();
   }
 }
+
+export default NavService;

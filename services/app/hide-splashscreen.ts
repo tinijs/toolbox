@@ -1,1 +1,6 @@
-export {hideAppSplashscreen as hideSplashscreen} from '@tinijs/core';
+import {hideAppSplashscreen} from '@tinijs/core';
+
+export {hideAppSplashscreen as hideSplashscreen};
+
+export default hideAppSplashscreen;
+export type HideSplashscreen = typeof hideAppSplashscreen;

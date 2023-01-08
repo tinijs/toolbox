@@ -9,3 +9,6 @@ export async function fetch_(
   }
   return !isJson ? response.text() : response.json();
 }
+
+export default fetch_;
+export type Fetch_ = typeof fetch_;

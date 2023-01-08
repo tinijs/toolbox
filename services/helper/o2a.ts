@@ -19,3 +19,6 @@ export function o2a<Type extends Record<string, unknown>>(
   // result
   return result;
 }
+
+export default o2a;
+export type O2a = typeof o2a;
