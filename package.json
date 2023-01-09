@@ -14,6 +14,7 @@
     "services",
     "helpers",
     "consts",
+    "src",
     "!**/*.ts",
     "**/*.d.ts"
   ],

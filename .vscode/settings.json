@@ -4,6 +4,7 @@
     "services/**/*.js": true,
     "helpers/**/*.js": true,
     "consts/**/*.js": true,
+    "src/**/*.js": true,
     "test/**/*.js": true,
     "public-api.js": true,
     "**/*.d.ts": true,

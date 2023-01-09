@@ -8,13 +8,13 @@ import {back} from './nav/back';
 export class NavService {
   private _router?: Router;
 
-  get ROUTER() {
-    if (!this._router) throw new Error('No router');
-    return this._router;
+  init(router: Router) {
+    this._router = router;
   }
 
-  setRouter(router: Router) {
-    this._router = router;
+  get ROUTER() {
+    if (!this._router) throw new Error('No router, please init() first.');
+    return this._router;
   }
 
   showIndicator() {

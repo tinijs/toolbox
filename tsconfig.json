@@ -11,6 +11,7 @@
     "services/**/*.ts",
     "helpers/**/*.ts",
     "consts/**/*.ts",
+    "src/**/*.ts",
     "test/**/*.ts",
     "public-api.ts"
   ]
