@@ -1,4 +1,4 @@
-import {Router} from '@tinijs/router';
+import {Router, ContextLite} from '@tinijs/router';
 
 import {showIndicator} from './nav/show-indicator';
 import {hideIndicator} from './nav/hide-indicator';
@@ -25,8 +25,8 @@ export class NavService {
     return hideIndicator();
   }
 
-  go(pathnameOrContext: string) {
-    return go(this.ROUTER, pathnameOrContext);
+  go(pathnameOrContext: string | ContextLite, shouldUpdateHistory?: boolean) {
+    return go(this.ROUTER, pathnameOrContext, shouldUpdateHistory);
   }
 
   back() {

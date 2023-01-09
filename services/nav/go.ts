@@ -1,7 +1,11 @@
-import {Router} from '@tinijs/router';
+import {Router, ContextLite} from '@tinijs/router';
 
-export function go(router: Router, pathnameOrContext: string) {
-  return router.render(pathnameOrContext);
+export function go(
+  router: Router,
+  pathnameOrContext: string | ContextLite,
+  shouldUpdateHistory?: boolean
+) {
+  return router.render(pathnameOrContext, shouldUpdateHistory);
 }
 
 export default go;
