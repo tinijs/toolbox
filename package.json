@@ -40,8 +40,8 @@
     "url": "https://github.com/tinijs/useful/issues"
   },
   "peerDependencies": {
-    "@tinijs/core": "file:../core/tinijs-core-0.0.1.tgz",
-    "@tinijs/router": "file:../router/tinijs-router-0.0.1.tgz"
+    "@tinijs/core": "0.0.1",
+    "@tinijs/router": "0.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
