@@ -1,7 +1,7 @@
-import {fetch_} from './fetch';
+import {fetchh} from './fetch';
 
 export function post<Result>(url: string, requestInit?: RequestInit) {
-  return fetch_(url, {...requestInit, method: 'POST'}) as Promise<Result>;
+  return fetchh(url, {...requestInit, method: 'POST'}) as Promise<Result>;
 }
 
 export default post;

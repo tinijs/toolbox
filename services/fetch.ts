@@ -1,10 +1,10 @@
-import {fetch_} from './fetch/fetch';
+import {fetchh} from './fetch/fetch';
 import {get} from './fetch/get';
 import {getText} from './fetch/get-text';
 import {post} from './fetch/post';
 import {put} from './fetch/put';
 import {patch} from './fetch/patch';
-import {delete_} from './fetch/delete';
+import {deletee} from './fetch/delete';
 
 export class FetchService {
   get<Result>(url: string, requestInit?: RequestInit) {
@@ -28,11 +28,11 @@ export class FetchService {
   }
 
   delete<Result>(url: string, requestInit?: RequestInit) {
-    return delete_<Result>(url, requestInit);
+    return deletee<Result>(url, requestInit);
   }
 
   fetch(input: RequestInfo, requestInit?: RequestInit, isJson = true) {
-    return fetch_(input, requestInit, isJson);
+    return fetchh(input, requestInit, isJson);
   }
 }
 

@@ -1,7 +1,7 @@
-import {fetch_} from './fetch';
+import {fetchh} from './fetch';
 
 export function getText(url: string, requestInit?: RequestInit) {
-  return fetch_(url, {...requestInit, method: 'GET'}, false) as Promise<string>;
+  return fetchh(url, {...requestInit, method: 'GET'}, false) as Promise<string>;
 }
 
 export default getText;

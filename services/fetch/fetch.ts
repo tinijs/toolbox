@@ -1,4 +1,4 @@
-export async function fetch_(
+export async function fetchh(
   input: RequestInfo,
   requestInit?: RequestInit,
   isJson = true
@@ -10,5 +10,5 @@ export async function fetch_(
   return !isJson ? response.text() : response.json();
 }
 
-export default fetch_;
-export type Fetch_ = typeof fetch_;
+export default fetchh;
+export type Fetchh = typeof fetchh;

@@ -1,9 +1,9 @@
 {
   "name": "@tinijs/useful",
-  "version": "0.0.2",
-  "description": "Useful services/helpers for building TiniJS apps.",
+  "version": "0.0.3",
+  "description": "Useful services, helpers for using in TiniJS apps.",
   "author": "Lam Nhan",
-  "homepage": "https://tinijs.lamnhan.com",
+  "homepage": "https://tinijs.dev",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -40,8 +40,8 @@
     "url": "https://github.com/tinijs/useful/issues"
   },
   "peerDependencies": {
-    "@tinijs/core": "0.0.2",
-    "@tinijs/router": "0.0.2"
+    "@tinijs/core": "file:../core/tinijs-core-0.0.3.tgz",
+    "@tinijs/router": "file:../router/tinijs-router-0.0.3.tgz"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

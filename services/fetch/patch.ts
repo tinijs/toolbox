@@ -1,7 +1,7 @@
-import {fetch_} from './fetch';
+import {fetchh} from './fetch';
 
 export function patch<Result>(url: string, requestInit?: RequestInit) {
-  return fetch_(url, {...requestInit, method: 'PATCH'}) as Promise<Result>;
+  return fetchh(url, {...requestInit, method: 'PATCH'}) as Promise<Result>;
 }
 
 export default patch;
