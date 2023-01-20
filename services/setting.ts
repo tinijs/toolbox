@@ -1,35 +1,24 @@
 import {Observable, ObservableSubscribe} from '@tinijs/core';
 import {LocalstorageService} from './localstorage';
 
-export interface SettingOptions {
-  onReady?: () => void;
-}
-
-export interface SettingIntegrations {
-  localstorageService?: LocalstorageService;
-}
-
 export interface AppSettings {
   theme?: string;
 }
 
+export type SettingReadyCallback = (settings: AppSettings) => void;
+
 export class SettingService {
   private readonly _LSK_THEME = 'setting_theme';
 
-  private _options: SettingOptions = {};
-  private _integrations: SettingIntegrations = {};
+  private _settingReadyCallback?: SettingReadyCallback;
+  private _localstorageService?: LocalstorageService;
 
   private _defaultTheme = 'light';
   @Observable() theme = this._defaultTheme;
   themeChanged!: ObservableSubscribe<string>;
 
-  setOptions(options: SettingOptions) {
-    this._options = options;
-    return this as SettingService;
-  }
-
-  setIntegrations(integrations: SettingIntegrations) {
-    this._integrations = integrations;
+  integrateLocalstorage(localstorageService: LocalstorageService) {
+    this._localstorageService = localstorageService;
     return this as SettingService;
   }
 
@@ -41,12 +30,17 @@ export class SettingService {
     return this as SettingService;
   }
 
+  onReady(cb: SettingReadyCallback) {
+    this._settingReadyCallback = cb;
+    return this as SettingService;
+  }
+
   async init() {
     const [theme] = await Promise.all([this._loadTheme()]);
     // set values
     this.changeTheme(theme);
     // trigger ready
-    this._options.onReady?.();
+    this._settingReadyCallback?.({theme});
   }
 
   changeTheme(name: string) {
@@ -56,7 +50,7 @@ export class SettingService {
     // set value
     this.theme = name;
     // set local
-    this._integrations.localstorageService?.set(this._LSK_THEME, name);
+    this._localstorageService?.set(this._LSK_THEME, name);
     // set remote
     // TODO
   }
@@ -66,9 +60,7 @@ export class SettingService {
     // from remote
     // TODO
     // from local
-    theme ||= await this._integrations.localstorageService?.get<string>(
-      this._LSK_THEME
-    );
+    theme ||= await this._localstorageService?.get<string>(this._LSK_THEME);
     // from system or default
     theme ||= matchMedia?.('(prefers-color-scheme: dark)').matches
       ? 'dark'
