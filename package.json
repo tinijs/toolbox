@@ -39,6 +39,9 @@
   "bugs": {
     "url": "https://github.com/tinijs/useful/issues"
   },
+  "dependencies": {
+    "localforage": "^1.10.0"
+  },
   "peerDependencies": {
     "@tinijs/core": "file:../core/tinijs-core-0.0.3.tgz",
     "@tinijs/router": "file:../router/tinijs-router-0.0.3.tgz"
