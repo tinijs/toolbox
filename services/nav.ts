@@ -8,13 +8,13 @@ import {back} from './nav/back';
 export class NavService {
   private _router?: Router;
 
-  init(router: Router) {
-    this._router = router;
-  }
-
-  get ROUTER() {
+  get router() {
     if (!this._router) throw new Error('No router, please init() first.');
     return this._router;
+  }
+
+  init(router: Router) {
+    this._router = router;
   }
 
   showIndicator() {
@@ -26,7 +26,7 @@ export class NavService {
   }
 
   go(pathnameOrContext: string | ContextLite, shouldUpdateHistory?: boolean) {
-    return go(this.ROUTER, pathnameOrContext, shouldUpdateHistory);
+    return go(this.router, pathnameOrContext, shouldUpdateHistory);
   }
 
   back() {
