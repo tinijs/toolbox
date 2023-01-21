@@ -1,21 +1,38 @@
 import {Observable, ObservableSubscribe} from '@tinijs/core';
 import {LocalstorageService} from './localstorage';
 
+import {SettingReadyCallback} from './setting/init';
+import changeTheme from './setting/change-theme';
+import queryTheme from './setting/query-theme';
+
 export interface AppSettings {
   theme?: string;
 }
 
-export type SettingReadyCallback = (settings: AppSettings) => void;
-
 export class SettingService {
   private readonly _LSK_THEME = 'setting_theme';
 
-  private _settingReadyCallback?: SettingReadyCallback;
   private _localstorageService?: LocalstorageService;
 
   private _defaultTheme = 'light';
   @Observable() theme = this._defaultTheme;
   themeChanged!: ObservableSubscribe<string>;
+
+  get localstorageGetter() {
+    const localstorageService = this
+      ._localstorageService as LocalstorageService;
+    return !localstorageService
+      ? undefined
+      : () => localstorageService.get<string>(this._LSK_THEME);
+  }
+
+  get localstorageSetter() {
+    const localstorageService = this
+      ._localstorageService as LocalstorageService;
+    return !localstorageService
+      ? undefined
+      : (input: string) => localstorageService.set(this._LSK_THEME, input);
+  }
 
   integrateLocalstorage(localstorageService: LocalstorageService) {
     this._localstorageService = localstorageService;
@@ -30,43 +47,23 @@ export class SettingService {
     return this as SettingService;
   }
 
-  onReady(cb: SettingReadyCallback) {
-    this._settingReadyCallback = cb;
-    return this as SettingService;
-  }
-
-  async init() {
-    const [theme] = await Promise.all([this._loadTheme()]);
+  async init(onReady?: SettingReadyCallback) {
+    const [theme] = await Promise.all([this.queryTheme()]);
     // set values
     this.changeTheme(theme);
     // trigger ready
-    this._settingReadyCallback?.({theme});
+    onReady?.({theme});
   }
 
   changeTheme(name: string) {
-    if (this.theme === name) return;
-    // affect
-    document.body.dataset.theme = name;
-    // set value
-    this.theme = name;
-    // set local
-    this._localstorageService?.set(this._LSK_THEME, name);
-    // set remote
-    // TODO
+    if (this.theme !== name) {
+      this.theme = name;
+      changeTheme(name, this.localstorageSetter);
+    }
   }
 
-  private async _loadTheme() {
-    let theme: undefined | null | string = null;
-    // from remote
-    // TODO
-    // from local
-    theme ||= await this._localstorageService?.get<string>(this._LSK_THEME);
-    // from system or default
-    theme ||= matchMedia?.('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : this._defaultTheme;
-    // result
-    return theme;
+  queryTheme() {
+    return queryTheme(this._defaultTheme, this.localstorageGetter);
   }
 }
 
