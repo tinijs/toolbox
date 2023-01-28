@@ -16,7 +16,8 @@
     "consts",
     "src",
     "!**/*.ts",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "auto-imports.json"
   ],
   "scripts": {
     "compile": "tsc",
