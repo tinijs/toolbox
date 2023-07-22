@@ -1,10 +1,10 @@
-# TiniJS Useful
+# TiniJS Toolbox
 
 Useful services, helpers, ... for using in TiniJS apps.
 
 ## Install
 
-To install the module: `npm i @tinijs/useful`
+To install the module: `npm i @tinijs/toolbox`
 
 It is recommended to download the [Skeleton](https://github.com/tinijs/skeleton) for a ready-to-use structured project.
 
@@ -17,9 +17,9 @@ For more, please visit: <https://tinijs.dev>
 ```ts
 const providers = {
   // fetch service
-  fetchService: () => import('@tinijs/useful/services/fetch'),
+  fetchService: () => import('@tinijs/toolbox/services/fetch'),
   // convert object to array helper
-  o2a: () => import('@tinijs/useful/services/helper/o2a'),
+  o2a: () => import('@tinijs/toolbox/services/helper/o2a'),
 };
 
 export default providers;
@@ -39,7 +39,7 @@ export class AppRoot extends TiniComponent {}
 
 ```ts
 import {Inject} from '@tinijs/core';
-import {FetchService, O2a} from '@tinijs/usefule';
+import {FetchService, O2a} from '@tinijs/toolbox';
 
 @Page('page-home')
 export class PageHome extends TiniComponent {
@@ -69,11 +69,11 @@ export class PageHome extends TiniComponent {
 ## Developement
 
 - Create a home for TiniJS: `mkdir TiniJS && cd TiniJS`
-- Fork the repo: `git clone https://github.com/tinijs/useful.git`
-- Install dependencies: `cd useful && npm i`
+- Fork the repo: `git clone https://github.com/tinijs/toolbox.git`
+- Install dependencies: `cd toolbox && npm i`
 - Make changes & preview locally: `npm run build && npm pack`
 - Push changes & create a PR 👌
 
 ## License
 
-**@tinijs/useful** is released under the [MIT](https://github.com/tinijs/useful/blob/master/LICENSE) license.
+**@tinijs/toolbox** is released under the [MIT](https://github.com/tinijs/toolbox/blob/master/LICENSE) license.
