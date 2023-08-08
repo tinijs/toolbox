@@ -8,22 +8,18 @@ To install the module: `npm i @tinijs/toolbox`
 
 It is recommended to download the [Skeleton](https://github.com/tinijs/skeleton) for a ready-to-use structured project.
 
-For more, please visit: <https://tinijs.dev>
+For more, please visit: <https://tinijs.dev> (TODO)
 
 ## Usage
 
 - Create the `providers.ts`
 
 ```ts
-const providers = {
-  // fetch service
-  fetchService: () => import('@tinijs/toolbox/services/fetch'),
-  // convert object to array helper
-  o2a: () => import('@tinijs/toolbox/services/helper/o2a'),
-};
+import {DependencyProviders} from '@tinijs/core';
 
-export default providers;
-export type Providers = typeof providers;
+export default {
+  fetchService: () => import('@tinijs/toolbox/services/fetch'),
+} as DependencyProviders;
 ```
 
 - Register the providers in `app.ts`
@@ -31,7 +27,7 @@ export type Providers = typeof providers;
 ```ts
 import providers from './providers';
 
-@App(providers)
+@App({providers})
 export class AppRoot extends TiniComponent {}
 ```
 
@@ -39,25 +35,14 @@ export class AppRoot extends TiniComponent {}
 
 ```ts
 import {Inject} from '@tinijs/core';
-import {FetchService, O2a} from '@tinijs/toolbox';
+import {FetchService} from '@tinijs/toolbox';
 
-@Page('page-home')
-export class PageHome extends TiniComponent {
+@Page('app-page-home')
+export class AppPageHome extends TiniComponent {
   @Inject() fetchService!: FetchService;
-  @Inject() o2a!: O2a;
 
-  onInit() {
-    // use the "FetchService" service
-    this.fetchService
-      .get('https://jsonplaceholder.typicode.com/todos/1')
-      .then(data => {})
-    // use the "o2a" helper
-    const obj = {
-      'item-1': {id: 1, title: 'Item 1'},
-      'item-2': {id: 2, title: 'Item 2'},
-      'item-3': {id: 3, title: 'Item 3'},
-    };
-    const arr = this.o2a(obj);
+  async onInit() {
+    const data = await this.fetchService.get('https://jsonplaceholder.typicode.com/todos/1')
   }
 }
 ```
