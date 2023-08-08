@@ -19,9 +19,7 @@
     "**/*.d.ts"
   ],
   "scripts": {
-    "compile": "tsc",
-    "build": "npm run compile",
-    "deploy": "npm run build && npm publish",
+    "build": "tsc",
     "lint": "gts lint",
     "fix": "gts fix"
   },
@@ -43,12 +41,12 @@
     "localforage": "^1.10.0"
   },
   "peerDependencies": {
-    "@tinijs/core": "file:../core/tinijs-core-0.0.3.tgz",
-    "@tinijs/router": "file:../router/tinijs-router-0.0.3.tgz"
+    "@tinijs/core": "^0.1.0",
+    "@tinijs/router": "^0.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.4.3",
-    "gts": "^4.0.1",
+    "@types/node": "^20.4.8",
+    "gts": "^5.0.0",
     "typescript": "~5.1.6"
   }
 }
