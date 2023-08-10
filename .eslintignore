@@ -1,6 +1,6 @@
+src/**/*.js
 services/**/*.js
 helpers/**/*.js
 consts/**/*.js
-src/**/*.js
 test/**/*.js
 public-api.js
