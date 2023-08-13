@@ -23,6 +23,8 @@ export function createPopup(config: PopupConfigs) {
     if (oauthWindow && oauthWindow.closed) {
       window.clearInterval(oauthInterval);
       return callback();
+    } else {
+      return false;
     }
   }, 1000);
 }
