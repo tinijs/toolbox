@@ -37,7 +37,9 @@ export class AppRoot extends TiniComponent {}
 import {Inject} from '@tinijs/core';
 import {FetchService} from '@tinijs/toolbox';
 
-@Page('app-page-home')
+@Page({
+  name: 'app-page-home',
+})
 export class AppPageHome extends TiniComponent {
   @Inject() fetchService!: FetchService;
 

@@ -37,12 +37,12 @@
   "bugs": {
     "url": "https://github.com/tinijs/toolbox/issues"
   },
+  "peerDependencies": {
+    "@tinijs/core": "file:../core/tinijs-core-0.6.0.tgz",
+    "@tinijs/router": "file:../router/tinijs-router-0.6.0.tgz"
+  },
   "dependencies": {
     "localforage": "^1.10.0"
-  },
-  "peerDependencies": {
-    "@tinijs/core": "^0.6.0",
-    "@tinijs/router": "^0.6.0"
   },
   "devDependencies": {
     "@types/node": "^20.4.8",
