@@ -1,6 +1,6 @@
 {
   "name": "@tinijs/toolbox",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "description": "Useful services, helpers, ... for TiniJS apps.",
   "author": "Lam Nhan",
   "homepage": "https://tinijs.dev",
@@ -38,8 +38,8 @@
     "url": "https://github.com/tinijs/toolbox/issues"
   },
   "peerDependencies": {
-    "@tinijs/core": "file:../core/tinijs-core-0.6.0.tgz",
-    "@tinijs/router": "file:../router/tinijs-router-0.6.0.tgz"
+    "@tinijs/core": "^0.8.0",
+    "@tinijs/router": "^0.8.0"
   },
   "dependencies": {
     "localforage": "^1.10.0"
