@@ -38,8 +38,8 @@
     "url": "https://github.com/tinijs/toolbox/issues"
   },
   "peerDependencies": {
-    "@tinijs/core": "^0.8.0",
-    "@tinijs/router": "^0.8.0"
+    "@tinijs/core": "file:../core",
+    "@tinijs/router": "file:../router"
   },
   "dependencies": {
     "localforage": "^1.10.0"
