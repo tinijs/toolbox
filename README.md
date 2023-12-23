@@ -56,7 +56,7 @@ export class AppPageHome extends TiniComponent {
 ## Developement
 
 - Create a home for TiniJS: `mkdir TiniJS && cd TiniJS`
-- Fork the repo: `git clone https://github.com/tinijs/toolbox.git`
+- Fork the repo
 - Install dependencies: `cd toolbox && npm i`
 - Make changes & preview locally: `npm run build && npm pack`
 - Push changes & create a PR 👌
