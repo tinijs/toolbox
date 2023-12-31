@@ -1,6 +1,8 @@
-import {LocalForage} from './local-forage';
+import {LocalForage} from './create-local-forage';
 
-async function increment(localForage: LocalForage, key: string, by = 1) {
+export type Increment = typeof increment;
+
+export async function increment(localForage: LocalForage, key: string, by = 1) {
   const value = await localForage.getItem<number>(key);
   const newValue = +(value || 0) + by;
   await localForage.setItem(key, newValue);
@@ -8,4 +10,3 @@ async function increment(localForage: LocalForage, key: string, by = 1) {
 }
 
 export default increment;
-export type Increment = typeof increment;

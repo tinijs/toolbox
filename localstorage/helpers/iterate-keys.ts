@@ -1,11 +1,13 @@
-import {LocalForage} from './local-forage';
+import {LocalForage} from './create-local-forage';
+
+export type IterateKeys = typeof iterateKeys;
 
 export type LocalstorageIterateKeysHandler = (
   key: string,
   iterationNumber: number
 ) => Promise<unknown>;
 
-async function iterateKeys(
+export async function iterateKeys(
   localForage: LocalForage,
   handler: LocalstorageIterateKeysHandler
 ) {
@@ -16,4 +18,3 @@ async function iterateKeys(
 }
 
 export default iterateKeys;
-export type IterateKeys = typeof iterateKeys;

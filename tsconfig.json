@@ -8,9 +8,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "services/**/*.ts",
-    "helpers/**/*.ts",
-    "consts/**/*.ts",
+    "fetch/**/*.ts",
+    "localstorage/**/*.ts",
     "src/**/*.ts",
     "test/**/*.ts",
     "public-api.ts"

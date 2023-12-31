@@ -1,4 +1,6 @@
-import {LocalForage} from './local-forage';
+import {LocalForage} from './create-local-forage';
+
+export type Iterate = typeof iterate;
 
 export type LocalstorageIterateHandler<Data> = (
   value: Data,
@@ -6,7 +8,7 @@ export type LocalstorageIterateHandler<Data> = (
   iterationNumber: number
 ) => Promise<unknown>;
 
-function iterate<Data>(
+export function iterate<Data>(
   localForage: LocalForage,
   handler: LocalstorageIterateHandler<Data>
 ) {
@@ -14,4 +16,3 @@ function iterate<Data>(
 }
 
 export default iterate;
-export type Iterate = typeof iterate;

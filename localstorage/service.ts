@@ -1,19 +1,20 @@
-import localForagee, {LocalForageOptions} from './localstorage/local-forage';
-import keys from './localstorage/keys';
-import get from './localstorage/get';
-import getBulk from './localstorage/get-bulk';
-import set from './localstorage/set';
-// import setBulk from './localstorage/set-bulk';
-import increment from './localstorage/increment';
-import iterate, {LocalstorageIterateHandler} from './localstorage/iterate';
+import createLocalForage, {
+  LocalForageOptions,
+} from './helpers/create-local-forage';
+import keys from './helpers/keys';
+import get from './helpers/get';
+import getBulk from './helpers/get-bulk';
+import set from './helpers/set';
+import increment from './helpers/increment';
+import iterate, {LocalstorageIterateHandler} from './helpers/iterate';
 import iterateKeys, {
   LocalstorageIterateKeysHandler,
-} from './localstorage/iterate-keys';
-import remove from './localstorage/remove';
-import clear from './localstorage/clear';
-import removeBulk from './localstorage/remove-bulk';
-import removeByPrefix from './localstorage/remove-by-prefix';
-import removeBySuffix from './localstorage/remove-by-suffix';
+} from './helpers/iterate-keys';
+import remove from './helpers/remove';
+import clear from './helpers/clear';
+import removeBulk from './helpers/remove-bulk';
+import removeByPrefix from './helpers/remove-by-prefix';
+import removeBySuffix from './helpers/remove-by-suffix';
 
 export class LocalstorageService {
   private _localForageInstance?: LocalForage;
@@ -26,7 +27,7 @@ export class LocalstorageService {
   }
 
   init(localForageOptions: LocalForageOptions = {}) {
-    this._localForageInstance = localForagee(localForageOptions);
+    this._localForageInstance = createLocalForage(localForageOptions);
     return this as LocalstorageService;
   }
 

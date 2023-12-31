@@ -1,6 +1,11 @@
-import {LocalForage} from './local-forage';
+import {LocalForage} from './create-local-forage';
 
-async function getBulk<Result>(localForage: LocalForage, keys: string[]) {
+export type GetBulk = typeof getBulk;
+
+export async function getBulk<Result>(
+  localForage: LocalForage,
+  keys: string[]
+) {
   const result = [] as unknown[];
   for (let i = 0; i < keys.length; i++) {
     const value = await localForage.getItem(keys[i]);
@@ -10,4 +15,3 @@ async function getBulk<Result>(localForage: LocalForage, keys: string[]) {
 }
 
 export default getBulk;
-export type GetBulk = typeof getBulk;

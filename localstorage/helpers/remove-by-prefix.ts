@@ -1,6 +1,8 @@
-import {LocalForage} from './local-forage';
+import {LocalForage} from './create-local-forage';
 
-async function removeByPrefix(localForage: LocalForage, prefix: string) {
+export type RemoveByPrefix = typeof removeByPrefix;
+
+export async function removeByPrefix(localForage: LocalForage, prefix: string) {
   const _keys = await localForage.keys();
   for (let i = 0; i < _keys.length; i++) {
     if (_keys[i].substring(0, prefix.length) === prefix) {
@@ -10,4 +12,3 @@ async function removeByPrefix(localForage: LocalForage, prefix: string) {
 }
 
 export default removeByPrefix;
-export type RemoveByPrefix = typeof removeByPrefix;

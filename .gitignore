@@ -1,9 +1,8 @@
 .DS_Store
 node_modules/
+fetch/**/*.js
+localstorage/**/*.js
 src/**/*.js
-services/**/*.js
-helpers/**/*.js
-consts/**/*.js
 test/**/*.js
 public-api.js
 *.map

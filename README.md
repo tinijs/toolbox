@@ -18,7 +18,7 @@ For more, please visit: <https://tinijs.dev> (TODO)
 import {DependencyProviders} from '@tinijs/core';
 
 export default {
-  fetchService: () => import('@tinijs/toolbox/services/fetch'),
+  fetchService: () => import('@tinijs/toolbox/fetch/service'),
 } as DependencyProviders;
 ```
 
