@@ -1,7 +1,11 @@
 .DS_Store
 node_modules/
+app/**/*.js
+common/**/*.js
+crypto/**/*.js
 fetch/**/*.js
 localstorage/**/*.js
+gun/**/*.js
 src/**/*.js
 test/**/*.js
 public-api.js
