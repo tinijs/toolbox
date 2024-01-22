@@ -1,9 +1,8 @@
 {
   "files.exclude": {
     ".vscode/": true,
-    "services/**/*.js": true,
-    "helpers/**/*.js": true,
-    "consts/**/*.js": true,
+    "fetch/**/*.js": true,
+    "localstorage/**/*.js": true,
     "src/**/*.js": true,
     "test/**/*.js": true,
     "public-api.js": true,
