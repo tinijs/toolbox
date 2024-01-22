@@ -1,4 +1,5 @@
 export type FetchX = typeof fetchx;
+
 export type Params = Parameters<FetchX>;
 export type Method = Params[0];
 export type Input = Params[1];
