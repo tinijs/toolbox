@@ -11,12 +11,12 @@ import {generateRSAKeys} from '../../crypto/helpers/generate-rsa-keys';
 import {encryptRSA} from '../../crypto/helpers/encrypt-rsa';
 import {decryptRSA} from '../../crypto/helpers/decrypt-rsa';
 
-import {UsersService, User, EditableProfile} from './users';
+import {UserService, User, EditableProfile} from './user';
 
 export class AuthService {
-  private gun: IGunInstance<any>;
-  private sea: ISEA;
-  private gunUser: GunUserInstance;
+  private gun?: IGunInstance<any>;
+  private sea?: ISEA;
+  private gunUser?: GunUserInstance;
 
   private readonly ERRORS = {
     NO_INIT: new Error('Missing the context, please init() first!'),
@@ -29,7 +29,7 @@ export class AuthService {
     SIGNOUT_FAILED: new Error('Failed to sign out!'),
   };
 
-  constructor(public readonly usersService: UsersService) {}
+  constructor(public readonly userService: UserService) {}
 
   init(GUN: IGunInstance<any>, GUN_USER: GunUserInstance, SEA: ISEA) {
     this.gun = GUN;
@@ -58,7 +58,7 @@ export class AuthService {
 
   get currentUser() {
     const pair = (this.userChain._ as any)?.sea;
-    const rsaPair = (this.userChain as any).rsa as {
+    const pairRSA = (this.userChain as any).rsa as {
       rpub: CryptoKey;
       rpriv: CryptoKey;
     };
@@ -71,8 +71,8 @@ export class AuthService {
       pub: pair.pub,
       epub: pair.epub,
       // rsa keys
-      rsaPair,
-      rpub: rsaPair?.rpub,
+      pairRSA,
+      rpub: pairRSA?.rpub,
     };
   }
 
@@ -84,6 +84,12 @@ export class AuthService {
     return this.currentUser.pair;
   }
 
+  get userPairRSA() {
+    const pair = this.currentUser.pairRSA;
+    if (!pair) throw this.ERRORS.NO_RSA;
+    return pair;
+  }
+
   get userPub() {
     return this.currentUser.pub;
   }
@@ -92,23 +98,17 @@ export class AuthService {
     return this.currentUser.epub;
   }
 
-  get userRSAPair() {
-    const pair = this.currentUser.rsaPair;
-    if (!pair) throw this.ERRORS.NO_RSA;
-    return pair;
-  }
-
   get userRpub() {
-    return this.userRSAPair.rpub;
+    return this.userPairRSA.rpub;
   }
 
-  async hashSecretData(participantEpub: string, data: string) {
+  async hashSecret(participantEpub: string, data: string) {
     const secret = await this.SEA.secret(participantEpub, this.userPair);
     if (!secret) throw this.ERRORS.NO_SECRET;
     return hmac(data, secret);
   }
 
-  async encryptData(raw: string, receiverEpub?: string): Promise<string> {
+  async encrypt(raw: string, receiverEpub?: string): Promise<string> {
     if (!raw) throw this.ERRORS.NO_ENCRYPTION_DATA;
     const secret = !receiverEpub
       ? this.userPair
@@ -119,7 +119,7 @@ export class AuthService {
     return result;
   }
 
-  async decryptData(cipherPlus: string, senderEpub?: string): Promise<string> {
+  async decrypt(cipherPlus: string, senderEpub?: string): Promise<string> {
     if (!cipherPlus) throw this.ERRORS.NO_ENCRYPTION_DATA;
     const secret = !senderEpub
       ? this.userPair
@@ -130,21 +130,29 @@ export class AuthService {
     return result;
   }
 
-  async encryptDataRSA(receiverRpub: CryptoKey, raw: string) {
+  async encryptRSA(receiverRpub: CryptoKey, raw: string) {
     return encryptRSA(receiverRpub, raw);
   }
 
-  async decryptDataRSA(cipherPlus: string) {
-    return decryptRSA(this.userRSAPair.rpriv, cipherPlus);
+  async decryptRSA(cipherPlus: string) {
+    return decryptRSA(this.userPairRSA.rpriv, cipherPlus);
+  }
+
+  async sign(data: any) {
+    return this.SEA.sign(data, this.userPair);
+  }
+
+  async verify(message: string, senderEpub: string) {
+    return this.SEA.verify(message, senderEpub);
   }
 
   async getProfile() {
-    return this.usersService.getById(this.userId);
+    return this.userService.getById(this.userId);
   }
 
   async streamProfile(callback: StreamCallback<User | null>) {
     try {
-      this.usersService.streamById(this.userId, callback);
+      this.userService.streamById(this.userId, callback);
     } catch (error) {
       emitStaticValue(callback);
     }
@@ -194,7 +202,7 @@ export class AuthService {
         if (result.err) return reject(new Error(result.err));
         // user profile
         const {publicKey, privateKey} = await generateRSAKeys();
-        const rsaPriv = await this.encryptData(privateKey);
+        const rsaPriv = await this.encrypt(privateKey);
         await setValues(this.userChain as any, {
           ...editableProfile,
           createdAt: new Date().toISOString(),
@@ -204,7 +212,7 @@ export class AuthService {
         // users index
         const userId = this.userId;
         const userIdHash = await sha256(userId);
-        await setValue(this.GUN.get('#users'), userIdHash, userId);
+        await setValue(this.userService.usersChain, userIdHash, userId);
         // result
         resolve(true);
       })

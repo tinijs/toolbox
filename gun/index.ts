@@ -14,4 +14,4 @@ export * from './helpers/emit-stream-value';
 export * from './service';
 
 export * from './services/auth';
-export * from './services/users';
+export * from './services/user';
