@@ -1,0 +1,13 @@
+import {base64ToBinary} from '../../common/helpers/base64-to-binary';
+import {RSA_ALGORITHM} from './generate-rsa-keys';
+
+export type ImportRSAPublicKey = typeof importRSAPublicKey;
+
+export async function importRSAPublicKey(base64: string) {
+  const keyData = base64ToBinary(base64);
+  return await crypto.subtle.importKey('spki', keyData, RSA_ALGORITHM, false, [
+    'encrypt',
+  ]);
+}
+
+export default importRSAPublicKey;

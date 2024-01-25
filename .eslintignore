@@ -1,4 +1,8 @@
+app/**/*.js
+common/**/*.js
+crypto/**/*.js
 fetch/**/*.js
+gun/**/*.js
 localstorage/**/*.js
 src/**/*.js
 test/**/*.js

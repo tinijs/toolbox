@@ -11,8 +11,12 @@
   "main": "public-api.js",
   "types": "public-api.d.ts",
   "files": [
+    "app",
+    "common",
+    "crypto",
     "fetch",
     "localstorage",
+    "gun",
     "src",
     "!**/*.ts",
     "**/*.d.ts"
@@ -36,8 +40,13 @@
   "bugs": {
     "url": "https://github.com/tinijs/toolbox/issues"
   },
+  "peerDependencies": {
+    "tinijs": "^0.15.0"
+  },
   "dependencies": {
-    "localforage": "^1.10.0"
+    "gun": "^0.2020.1239",
+    "localforage": "^1.10.0",
+    "share-api-polyfill": "^1.1.1"
   },
   "devDependencies": {
     "@types/node": "^20.9.4",

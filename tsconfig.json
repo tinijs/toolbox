@@ -8,8 +8,12 @@
     "skipLibCheck": true
   },
   "include": [
+    "app/**/*.ts",
+    "common/**/*.ts",
+    "crypto/**/*.ts",
     "fetch/**/*.ts",
     "localstorage/**/*.ts",
+    "gun/**/*.ts",
     "src/**/*.ts",
     "test/**/*.ts",
     "public-api.ts"
