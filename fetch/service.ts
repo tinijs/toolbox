@@ -3,11 +3,7 @@ import {fetchx, Method, Input, Body, Options} from './helpers/fetch';
 export class FetchService {
   private globalHeaders: Record<string, string> = {};
 
-  get BASE_URL() {
-    return this.baseUrl;
-  }
-
-  constructor(private readonly baseUrl?: string) {}
+  constructor(readonly baseUrl: string) {}
 
   registerGlobalHeaders(headers: Record<string, string>) {
     this.globalHeaders = {...this.globalHeaders, ...headers};
@@ -36,7 +32,7 @@ export class FetchService {
 
   fetch<Result>(method: Method, input: Input, body?: Body, options?: Options) {
     return fetchx<Result>(method, input, body, options, {
-      baseUrl: this.BASE_URL,
+      baseUrl: this.baseUrl,
       globalHeaders: this.globalHeaders,
     });
   }

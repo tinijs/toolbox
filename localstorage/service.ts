@@ -14,18 +14,12 @@ import {removeBySuffix} from './helpers/remove-by-suffix';
 import {clear} from './helpers/clear';
 
 export class LocalstorageService {
-  private localForageInstance?: LocalForage;
+  readonly localForage: LocalForage;
 
-  get localForage() {
-    if (!this.localForageInstance) {
-      throw new Error('No localForage instance, please init() first.');
-    }
-    return this.localForageInstance;
-  }
-
-  init(options: Parameters<typeof createLocalForage>[0]) {
-    this.localForageInstance = createLocalForage(options);
-    return this as LocalstorageService;
+  constructor(
+    readonly localForageOptions: Parameters<typeof createLocalForage>[0]
+  ) {
+    this.localForage = createLocalForage(localForageOptions);
   }
 
   keys() {

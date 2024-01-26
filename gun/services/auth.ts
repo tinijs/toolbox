@@ -1,25 +1,18 @@
-import {IGunInstance, ISEA} from 'gun';
-
-import {GunUserInstance} from '../helpers/init-user-actions';
-import {StreamCallback} from '../helpers/create-stream';
-import {emitStaticValue} from '../helpers/emit-static-value';
-import {setValue} from '../helpers/set-value';
-import {setValues} from '../helpers/set-values';
 import {sha256} from '../../crypto/helpers/sha-256';
 import {hmac} from '../../crypto/helpers/hmac';
 import {generateRSAKeys} from '../../crypto/helpers/generate-rsa-keys';
 import {encryptRSA} from '../../crypto/helpers/encrypt-rsa';
 import {decryptRSA} from '../../crypto/helpers/decrypt-rsa';
+import {createGunInstance} from '../helpers/create-gun-instance';
+import {StreamCallback} from '../helpers/create-stream';
+import {emitStaticValue} from '../helpers/emit-static-value';
+import {setValue} from '../helpers/set-value';
+import {setValues} from '../helpers/set-values';
 
 import {UserService, User, EditableProfile} from './user';
 
 export class AuthService {
-  private gun?: IGunInstance<any>;
-  private sea?: ISEA;
-  private gunUser?: GunUserInstance;
-
   private readonly ERRORS = {
-    NO_INIT: new Error('Missing the context, please init() first!'),
     NO_USER: new Error('Unauthenticated!'),
     NO_RSA: new Error('RSA key pair not loaded!'),
     NO_SECRET: new Error('Failed to generate secret!'),
@@ -29,27 +22,21 @@ export class AuthService {
     SIGNOUT_FAILED: new Error('Failed to sign out!'),
   };
 
-  constructor(public readonly userService: UserService) {}
-
-  init(GUN: IGunInstance<any>, GUN_USER: GunUserInstance, SEA: ISEA) {
-    this.gun = GUN;
-    this.gunUser = GUN_USER;
-    this.sea = SEA;
-  }
+  constructor(
+    readonly userService: UserService,
+    readonly gunInstance: ReturnType<typeof createGunInstance>
+  ) {}
 
   get GUN() {
-    if (!this.gun) throw this.ERRORS.NO_INIT;
-    return this.gun;
-  }
-
-  get SEA() {
-    if (!this.sea) throw this.ERRORS.NO_INIT;
-    return this.sea;
+    return this.gunInstance.gun;
   }
 
   get GUN_USER() {
-    if (!this.gunUser) throw this.ERRORS.NO_INIT;
-    return this.gunUser;
+    return this.gunInstance.gunUser;
+  }
+
+  get SEA() {
+    return this.gunInstance.sea;
   }
 
   get userChain() {
