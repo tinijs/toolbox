@@ -10,6 +10,7 @@
   "include": [
     "app/**/*.ts",
     "common/**/*.ts",
+    "content/**/*.ts",
     "crypto/**/*.ts",
     "fetch/**/*.ts",
     "localstorage/**/*.ts",

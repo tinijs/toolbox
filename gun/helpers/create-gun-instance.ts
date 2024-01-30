@@ -11,7 +11,7 @@ export type GunLink = GunResult<{'#': string}>;
 
 export type CreateGunInstance = typeof createGunInstance;
 
-export function createGunInstance(options?: GunOptions) {
+export function createGunInstance(root: string, options?: GunOptions) {
   const gun = Gun(
     options || {
       localStorage: false,
@@ -25,7 +25,7 @@ export function createGunInstance(options?: GunOptions) {
   );
   const gunUser = gun.user();
   const sea = Gun.SEA;
-  return {gun, gunUser, sea};
+  return {gun, gunUser, sea, root};
 }
 
 export default createGunInstance;

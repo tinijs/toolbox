@@ -2,6 +2,7 @@
 node_modules/
 app/**/*.js
 common/**/*.js
+content/**/*.js
 crypto/**/*.js
 fetch/**/*.js
 localstorage/**/*.js

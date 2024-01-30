@@ -1,5 +1,6 @@
 export * from './app/service';
 export * from './common/service';
+export * from './content/service';
 export * from './crypto/service';
 export * from './fetch/service';
 export * from './gun/service';
