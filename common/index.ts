@@ -8,5 +8,7 @@ export * from './helpers/retry';
 export * from './helpers/debounce';
 export * from './helpers/once';
 export * from './helpers/deduplicate-callback';
+export * from './helpers/slugify';
+export * from './helpers/transliterate';
 
 export * from './service';

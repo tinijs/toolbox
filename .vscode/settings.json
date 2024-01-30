@@ -3,6 +3,7 @@
     ".vscode/": true,
     "app/**/*.js": true,
     "common/**/*.js": true,
+    "content/**/*.js": true,
     "crypto/**/*.js": true,
     "fetch/**/*.js": true,
     "gun/**/*.js": true,

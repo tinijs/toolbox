@@ -25,13 +25,13 @@ export class ContentInstance<Type> {
 
   getListUrl() {
     const id = this.rootIndex[this.collectionName];
-    if (!id) throw new Error(`No listing for ${this.collectionName}`);
+    if (!id) throw new Error(`No listing found for ${this.collectionName}`);
     return this.getUrl(id);
   }
 
   getSearchUrl() {
     const id = this.rootIndex[`${this.collectionName}-search`];
-    if (!id) throw new Error(`No listing for ${this.collectionName}`);
+    if (!id) throw new Error(`No search found for ${this.collectionName}`);
     return this.getUrl(id);
   }
 
@@ -42,7 +42,7 @@ export class ContentInstance<Type> {
   }
 
   async fetchList() {
-    return get<Record<string, Type>>(this.getListUrl());
+    return get<Type[]>(this.getListUrl());
   }
 
   async fetchSearch() {
