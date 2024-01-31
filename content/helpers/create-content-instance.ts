@@ -4,9 +4,11 @@ export type CreateContentInstance = typeof createContentInstance;
 
 export type RootIndex = Record<string, string>;
 
-export type IndexBuilder = () => void;
+// export type IndexBuilder = () => void;
 export interface ContentOptions {
-  indexing?: Record<string, IndexBuilder>;
+  // indexing?: Record<string, IndexBuilder>;
+  baseUrl?: string;
+  manualRootIndex?: RootIndex;
 }
 
 export class ContentInstance<Type> {
@@ -15,66 +17,77 @@ export class ContentInstance<Type> {
   constructor(
     readonly collectionName: string,
     readonly baseUrl: string,
-    readonly rootIndex: RootIndex,
-    readonly options: ContentOptions = {}
+    readonly options: Omit<ContentOptions, 'baseUrl'> = {}
   ) {}
 
-  getUrl(id: string) {
+  async getRootIndex() {
+    const rootIndex =
+      this.options.manualRootIndex ||
+      ContentInstance.indexRegistry.get(this.baseUrl) ||
+      ContentInstance.indexRegistry
+        .set(this.baseUrl, await get<RootIndex>(`${this.baseUrl}/index.json`))
+        .get(this.baseUrl);
+    if (!rootIndex)
+      throw new Error(`Error loading root index for ${this.baseUrl}`);
+    return rootIndex;
+  }
+
+  async getUrl(id: string) {
     return `${this.baseUrl}/${id}.json`;
   }
 
-  getListUrl() {
-    const id = this.rootIndex[this.collectionName];
+  async getListUrl() {
+    const rootIndex = await this.getRootIndex();
+    const id = rootIndex[this.collectionName];
     if (!id) throw new Error(`No listing found for ${this.collectionName}`);
     return this.getUrl(id);
   }
 
-  getSearchUrl() {
-    const id = this.rootIndex[`${this.collectionName}-search`];
+  async getSearchUrl() {
+    const rootIndex = await this.getRootIndex();
+    const id = rootIndex[`${this.collectionName}-search`];
     if (!id) throw new Error(`No search found for ${this.collectionName}`);
     return this.getUrl(id);
   }
 
-  getItemUrl(slug: string) {
-    const id = this.rootIndex[`${this.collectionName}/${slug}`];
+  async getItemUrl(slug: string) {
+    const rootIndex = await this.getRootIndex();
+    const id = rootIndex[`${this.collectionName}/${slug}`];
     if (!id) throw new Error(`No item for ${this.collectionName}/${slug}`);
     return this.getUrl(id);
   }
 
+  async has(slug?: string) {
+    const rootIndex = await this.getRootIndex();
+    return !slug
+      ? !!rootIndex[this.collectionName]
+      : !!rootIndex[`${this.collectionName}/${slug}`];
+  }
+
   async fetchList() {
-    return get<Type[]>(this.getListUrl());
+    return get<Type[]>(await this.getListUrl());
   }
 
   async fetchSearch() {
-    return get<Record<string, string>>(this.getSearchUrl());
+    return get<Record<string, string>>(await this.getSearchUrl());
   }
 
   async fetchItemBySlug(slug: string) {
-    return get<Type>(this.getItemUrl(slug));
+    return get<Type>(await this.getItemUrl(slug));
   }
 
   async fetchItemById(id: string) {
-    return get<Type>(this.getUrl(id));
+    return get<Type>(await this.getUrl(id));
   }
 }
 
-async function createContentInstance<Type>(
+export function createContentInstance<Type>(
   collectionName: string,
-  baseUrl?: string,
-  rootIndex?: RootIndex,
-  options?: ContentOptions
+  options: ContentOptions = {}
 ) {
-  // base url
-  baseUrl ||= `${window.location.origin}/tini-content`;
-  // root index
-  rootIndex ||=
-    ContentInstance.indexRegistry.get(baseUrl) ||
-    ContentInstance.indexRegistry
-      .set(baseUrl, await get<RootIndex>(`${baseUrl}/index.json`))
-      .get(baseUrl);
-  // create instance
-  if (!rootIndex) throw new Error(`Error loading root index for ${baseUrl}`);
-  return new ContentInstance<Type>(collectionName, baseUrl, rootIndex, options);
+  const baseUrl = options.baseUrl || `${window.location.origin}/tini-content`;
+  delete options.baseUrl;
+  return new ContentInstance<Type>(collectionName, baseUrl, options);
 }
 
 export default createContentInstance;

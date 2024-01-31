@@ -1,4 +1,6 @@
-import {Index, IndexSearchResult} from 'flexsearch';
+// @ts-ignore
+import Index from 'flexsearch/dist/module/index';
+import {IndexSearchResult} from 'flexsearch';
 
 import {transliterate} from '../common/helpers/transliterate';
 import {ContentInstance} from './helpers/create-content-instance';
