@@ -1,3 +1,4 @@
+schema/**/*.js
 app/**/*.js
 common/**/*.js
 content/**/*.js

@@ -5,20 +5,22 @@ import {
   Title,
   Desc,
   Created,
-  Updated,
   Thumbnail,
-  Image,
   Content,
+  Metadata,
+  I18n,
 } from './common';
 
-export interface Post
+export interface Category
   extends Id,
     Slug,
     Status,
     Title,
     Desc,
     Created,
-    Updated,
     Thumbnail,
-    Image,
-    Content {}
+    Content,
+    Partial<Metadata>,
+    Partial<I18n> {}
+
+export type CategoryLite = Omit<Category, 'content' | 'metadata'>;

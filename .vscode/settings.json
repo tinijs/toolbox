@@ -1,6 +1,7 @@
 {
   "files.exclude": {
     ".vscode/": true,
+    "schema/**/*.js": true,
     "app/**/*.js": true,
     "common/**/*.js": true,
     "content/**/*.js": true,

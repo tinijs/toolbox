@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/
+schema/**/*.js
 app/**/*.js
 common/**/*.js
 content/**/*.js

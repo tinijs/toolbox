@@ -8,6 +8,7 @@
     "skipLibCheck": true
   },
   "include": [
+    "schema/**/*.ts",
     "app/**/*.ts",
     "common/**/*.ts",
     "content/**/*.ts",
