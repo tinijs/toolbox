@@ -1,5 +1,5 @@
-import {Slug, Name} from './common';
+import {Slug, Title} from './common';
 
 export type TagLite = Tag;
 
-export interface Tag extends Slug, Name {}
+export interface Tag extends Slug, Title {}

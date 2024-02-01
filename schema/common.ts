@@ -1,3 +1,7 @@
+import {AuthorLite} from './author';
+import {CategoryLite} from './category';
+import {TagLite} from './tag';
+
 export enum Statuses {
   Draft = 'draft',
   Publish = 'publish',
@@ -69,14 +73,6 @@ export interface Images {
   images: Record<string, string | ResourceAlike>;
 }
 
-export interface Tags {
-  tags: string[];
-}
-
-export interface Keywords {
-  keywords: string[];
-}
-
 export interface Url {
   url: string;
 }
@@ -90,8 +86,16 @@ export interface I18n {
   origin: string;
 }
 
-export interface Metadata<Type = Record<string, any>> {
-  metadata: Type;
+export interface Authors<Type = Partial<AuthorLite>> {
+  authors: DenormItems<Type>;
+}
+
+export interface Categories<Type = Partial<CategoryLite>> {
+  categories: DenormItems<Type>;
+}
+
+export interface Tags<Type = Partial<TagLite>> {
+  tags: DenormItems<Type>;
 }
 
 /*
@@ -100,5 +104,9 @@ export interface Metadata<Type = Record<string, any>> {
 
 export interface ResourceAlike {
   name: string;
-  src: string;
+  url: string;
 }
+
+export type DenormItems<Type> =
+  | Array<string | Type>
+  | Record<string, true | string | Type>;

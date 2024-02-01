@@ -9,6 +9,9 @@ import {
   Thumbnail,
   Image,
   Content,
+  Authors,
+  Categories,
+  Tags,
 } from './common';
 
 export type PostLite = Omit<Post, 'content'>;
@@ -23,4 +26,7 @@ export interface Post
     Updated,
     Thumbnail,
     Image,
-    Content {}
+    Content,
+    Authors,
+    Categories,
+    Tags {}
