@@ -7,9 +7,9 @@ import {
   Created,
   Thumbnail,
   Content,
-  Metadata,
-  I18n,
 } from './common';
+
+export type CategoryLite = Omit<Category, 'content'>;
 
 export interface Category
   extends Id,
@@ -19,8 +19,4 @@ export interface Category
     Desc,
     Created,
     Thumbnail,
-    Content,
-    Partial<Metadata>,
-    Partial<I18n> {}
-
-export type CategoryLite = Omit<Category, 'content' | 'metadata'>;
+    Content {}

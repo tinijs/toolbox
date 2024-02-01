@@ -9,9 +9,9 @@ import {
   Thumbnail,
   Image,
   Content,
-  Metadata,
-  I18n,
 } from './common';
+
+export type PostLite = Omit<Post, 'content'>;
 
 export interface Post
   extends Id,
@@ -23,8 +23,4 @@ export interface Post
     Updated,
     Thumbnail,
     Image,
-    Content,
-    Partial<Metadata>,
-    Partial<I18n> {}
-
-export type PostLite = Omit<Post, 'content' | 'metadata'>;
+    Content {}

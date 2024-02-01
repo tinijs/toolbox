@@ -1,15 +1,6 @@
-import {
-  Id,
-  Slug,
-  Status,
-  Name,
-  Desc,
-  Created,
-  Url,
-  Content,
-  Metadata,
-  I18n,
-} from './common';
+import {Id, Slug, Status, Name, Desc, Created, Url, Content} from './common';
+
+export type AuthorLite = Omit<Author, 'content'>;
 
 export interface Author
   extends Id,
@@ -19,11 +10,7 @@ export interface Author
     Desc,
     Created,
     Partial<Url>,
-    Content,
-    Partial<Metadata>,
-    Partial<I18n> {
+    Content {
   photoUrl: string;
   email?: string;
 }
-
-export type AuthorLite = Omit<Author, 'content' | 'metadata'>;

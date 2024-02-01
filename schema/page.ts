@@ -9,9 +9,9 @@ import {
   Thumbnail,
   Image,
   Content,
-  Metadata,
-  I18n,
 } from './common';
+
+export type PageLite = Omit<Page, 'content'>;
 
 export interface Page
   extends Id,
@@ -23,8 +23,4 @@ export interface Page
     Updated,
     Thumbnail,
     Image,
-    Content,
-    Partial<Metadata>,
-    Partial<I18n> {}
-
-export type PageLite = Omit<Page, 'content' | 'metadata'>;
+    Content {}
