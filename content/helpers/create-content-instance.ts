@@ -20,45 +20,37 @@ export class ContentInstance<Type> {
     readonly options: Omit<ContentOptions, 'baseUrl'> = {}
   ) {}
 
-  async getRootIndex() {
-    const rootIndex =
-      this.options.manualRootIndex ||
-      ContentInstance.indexRegistry.get(this.baseUrl) ||
-      ContentInstance.indexRegistry
-        .set(this.baseUrl, await get<RootIndex>(`${this.baseUrl}/index.json`))
-        .get(this.baseUrl);
-    if (!rootIndex)
-      throw new Error(`Error loading root index for ${this.baseUrl}`);
-    return rootIndex;
-  }
-
   async getUrl(id: string) {
     return `${this.baseUrl}/${id}.json`;
   }
 
+  async getRootIndexUrl() {
+    return this.getUrl('index');
+  }
+
   async getListUrl() {
-    const rootIndex = await this.getRootIndex();
+    const rootIndex = await this.retrieveRootIndex();
     const id = rootIndex[this.collectionName];
     if (!id) throw new Error(`No listing found for ${this.collectionName}`);
     return this.getUrl(id);
   }
 
   async getSearchUrl() {
-    const rootIndex = await this.getRootIndex();
+    const rootIndex = await this.retrieveRootIndex();
     const id = rootIndex[`${this.collectionName}-search`];
     if (!id) throw new Error(`No search found for ${this.collectionName}`);
     return this.getUrl(id);
   }
 
   async getItemUrl(slug: string) {
-    const rootIndex = await this.getRootIndex();
+    const rootIndex = await this.retrieveRootIndex();
     const id = rootIndex[`${this.collectionName}/${slug}`];
     if (!id) throw new Error(`No item for ${this.collectionName}/${slug}`);
     return this.getUrl(id);
   }
 
   async has(slug?: string) {
-    const rootIndex = await this.getRootIndex();
+    const rootIndex = await this.retrieveRootIndex();
     return !slug
       ? !!rootIndex[this.collectionName]
       : !!rootIndex[`${this.collectionName}/${slug}`];
@@ -78,6 +70,18 @@ export class ContentInstance<Type> {
 
   async fetchItemById(id: string) {
     return get<Type>(await this.getUrl(id));
+  }
+
+  async retrieveRootIndex() {
+    const rootIndex =
+      this.options.manualRootIndex ||
+      ContentInstance.indexRegistry.get(this.baseUrl) ||
+      ContentInstance.indexRegistry
+        .set(this.baseUrl, await get<RootIndex>(await this.getRootIndexUrl()))
+        .get(this.baseUrl);
+    if (!rootIndex)
+      throw new Error(`Error loading root index for ${this.baseUrl}`);
+    return rootIndex;
   }
 }
 
