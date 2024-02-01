@@ -45,10 +45,6 @@ export interface Content {
   content: string;
 }
 
-export interface Html {
-  html: string;
-}
-
 export interface Created {
   created: string;
 }

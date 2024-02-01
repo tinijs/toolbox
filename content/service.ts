@@ -3,9 +3,14 @@ import Index from 'flexsearch/dist/module/index';
 import {IndexSearchResult} from 'flexsearch';
 
 import {transliterate} from '../common/helpers/transliterate';
+import {slugify} from './helpers/slugify';
+import {parseDenorm} from './helpers/parse-denorm';
 import {ContentInstance} from './helpers/create-content-instance';
 
 export class ContentService<Type> {
+  slugify = slugify;
+  parseDenorm = parseDenorm;
+
   private items?: Type[];
   private recordItems?: Record<string, Type>;
   private fullItems = new Map<string, Type>();

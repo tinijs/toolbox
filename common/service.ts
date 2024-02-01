@@ -8,7 +8,6 @@ import {retry} from './helpers/retry';
 import {debounce} from './helpers/debounce';
 import {once} from './helpers/once';
 import {deduplicateCallback} from './helpers/deduplicate-callback';
-import {slugify} from './helpers/slugify';
 import {transliterate} from './helpers/transliterate';
 
 export class CommonService {
@@ -22,7 +21,6 @@ export class CommonService {
   debounce = debounce;
   once = once;
   deduplicateCallback = deduplicateCallback;
-  slugify = slugify;
   transliterate = transliterate;
 }
 
