@@ -11,7 +11,7 @@ export interface ContentOptions {
   manualRootIndex?: RootIndex;
 }
 
-export class ContentInstance<Type> {
+export class ContentInstance<Lite, Full> {
   static readonly indexRegistry = new Map<string, RootIndex>();
 
   constructor(
@@ -57,7 +57,7 @@ export class ContentInstance<Type> {
   }
 
   async fetchList() {
-    return get<Type[]>(await this.getListUrl());
+    return get<Lite[]>(await this.getListUrl());
   }
 
   async fetchSearch() {
@@ -65,11 +65,11 @@ export class ContentInstance<Type> {
   }
 
   async fetchItemBySlug(slug: string) {
-    return get<Type>(await this.getItemUrl(slug));
+    return get<Full>(await this.getItemUrl(slug));
   }
 
   async fetchItemById(id: string) {
-    return get<Type>(await this.getUrl(id));
+    return get<Full>(await this.getUrl(id));
   }
 
   async retrieveRootIndex() {
@@ -85,13 +85,13 @@ export class ContentInstance<Type> {
   }
 }
 
-export function createContentInstance<Type>(
+export function createContentInstance<Lite, Full>(
   collectionName: string,
   options: ContentOptions = {}
 ) {
   const baseUrl = options.baseUrl || `${window.location.origin}/tini-content`;
   delete options.baseUrl;
-  return new ContentInstance<Type>(collectionName, baseUrl, options);
+  return new ContentInstance<Lite, Full>(collectionName, baseUrl, options);
 }
 
 export default createContentInstance;

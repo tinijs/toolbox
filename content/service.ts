@@ -8,24 +8,24 @@ import {parseDenorm} from './helpers/parse-denorm';
 import {parseDenormItems} from './helpers/parse-denorm-items';
 import {ContentInstance} from './helpers/create-content-instance';
 
-export class ContentService<Type> {
+export class ContentService<Lite, Full> {
   slugify = slugify;
   parseDenorm = parseDenorm;
   parseDenormItems = parseDenormItems;
 
-  private items?: Type[];
-  private recordItems?: Record<string, Type>;
-  private fullItems = new Map<string, Type>();
+  private items?: Lite[];
+  private recordItems?: Record<string, Lite>;
+  private fullItems = new Map<string, Full>();
 
   private liteSearchItems?: Record<string, string>;
   private liteSearchIndex?: Index;
   private searchItems?: Record<string, string>;
   private searchIndex?: Index;
 
-  constructor(readonly content: ContentInstance<Type>) {}
+  constructor(readonly contentInstance: ContentInstance<Lite, Full>) {}
 
   private async getListAndRecord() {
-    this.items ||= (await this.content.fetchList()) || [];
+    this.items ||= (await this.contentInstance.fetchList()) || [];
     if (!this.recordItems) {
       this.recordItems = Object.fromEntries(
         this.items.map(item => [(item as any).slug, item])
@@ -36,14 +36,16 @@ export class ContentService<Type> {
 
   private async getSearchItems(results: IndexSearchResult) {
     const {recordItems} = await this.getListAndRecord();
-    const itemsBySlug = new Map<string, Type>();
+    const itemsBySlug = new Map<string, Lite>();
     results.forEach(slug => {
       const item = recordItems![slug];
       if (item) itemsBySlug.set(slug as string, item);
     });
     return !itemsBySlug.size
       ? []
-      : JSON.parse(JSON.stringify(Array.from(itemsBySlug.values())));
+      : (JSON.parse(
+          JSON.stringify(Array.from(itemsBySlug.values()))
+        ) as Lite[]);
   }
 
   async liteSearch(keyword: string) {
@@ -93,7 +95,7 @@ export class ContentService<Type> {
       index = this.searchIndex ||= new Index();
       // build full text search items
       const searchItems = (this.searchItems ||=
-        await this.content.fetchSearch());
+        await this.contentInstance.fetchSearch());
       // add to index
       Object.entries(searchItems).forEach(([slug, text]) =>
         (index as Index).add(slug, text)
@@ -105,8 +107,8 @@ export class ContentService<Type> {
   }
 
   async list(
-    filter?: (item: Type) => boolean,
-    sort?: (a: Type, b: Type) => number,
+    filter?: (item: Lite) => boolean,
+    sort?: (a: Lite, b: Lite) => number,
     limit?: number,
     offset = 0
   ) {
@@ -114,29 +116,31 @@ export class ContentService<Type> {
     if (filter) items = items.filter(filter);
     if (sort) items = items.sort(sort);
     if (limit) items = items.slice(offset, offset + limit);
-    return !items.length ? [] : JSON.parse(JSON.stringify(items));
+    return !items.length ? [] : (JSON.parse(JSON.stringify(items)) as Lite[]);
   }
 
   async getBySlug(slug: string) {
     const item =
       this.fullItems.get(slug) ||
       this.fullItems
-        .set(slug, await this.content.fetchItemBySlug(slug))
+        .set(slug, await this.contentInstance.fetchItemBySlug(slug))
         .get(slug);
-    return !item ? null : JSON.parse(JSON.stringify(item));
+    return !item ? null : (JSON.parse(JSON.stringify(item)) as Full);
   }
 
   async getById(id: string) {
     const item =
       this.fullItems.get(id) ||
-      this.fullItems.set(id, await this.content.fetchItemById(id)).get(id);
-    return !item ? null : JSON.parse(JSON.stringify(item));
+      this.fullItems
+        .set(id, await this.contentInstance.fetchItemById(id))
+        .get(id);
+    return !item ? null : (JSON.parse(JSON.stringify(item)) as Full);
   }
 
   async getLite(slug: string) {
     const {recordItems} = await this.getListAndRecord();
     const item = recordItems![slug];
-    return !item ? null : JSON.parse(JSON.stringify(item));
+    return !item ? null : (JSON.parse(JSON.stringify(item)) as Lite);
   }
 }
 
