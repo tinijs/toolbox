@@ -5,13 +5,13 @@ import {IndexSearchResult} from 'flexsearch';
 import {transliterate} from '../common/helpers/transliterate';
 import {slugify} from './helpers/slugify';
 import {parseDenorm} from './helpers/parse-denorm';
-import {parseDenormItems} from './helpers/parse-denorm-items';
+import {parseDenormList} from './helpers/parse-denorm-list';
 import {ContentInstance} from './helpers/create-content-instance';
 
 export class ContentService<Lite, Full> {
   slugify = slugify;
   parseDenorm = parseDenorm;
-  parseDenormItems = parseDenormItems;
+  parseDenormList = parseDenormList;
 
   private items?: Lite[];
   private recordItems?: Record<string, Lite>;
@@ -65,7 +65,7 @@ export class ContentService<Lite, Full> {
         if (tags) {
           text +=
             ' ' +
-            this.parseDenormItems(tags)
+            this.parseDenormList(tags)
               .map(item => item.title)
               .join(' ');
         }

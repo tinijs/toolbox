@@ -87,15 +87,15 @@ export interface I18n {
 }
 
 export interface Authors<Type = Partial<AuthorLite>> {
-  authors: DenormItems<Type>;
+  authors: DenormList<Type>;
 }
 
 export interface Categories<Type = Partial<CategoryLite>> {
-  categories: DenormItems<Type>;
+  categories: DenormList<Type>;
 }
 
 export interface Tags<Type = Partial<TagLite>> {
-  tags: DenormItems<Type>;
+  tags: DenormList<Type>;
 }
 
 /*
@@ -107,6 +107,6 @@ export interface ResourceAlike {
   url: string;
 }
 
-export type DenormItems<Type> =
+export type DenormList<Type> =
   | Array<string | Type>
   | Record<string, true | string | Type>;

@@ -2,17 +2,23 @@ import {StreamResult, StreamCallback} from './create-stream';
 
 export type PromisifyStream = typeof promisifyStream;
 
-type ExcludeLast<T extends any[]> = T extends [...infer ExcludeLast, any]
-  ? ExcludeLast
+export type ExcludeLastStreamMethodParam<T extends any[]> = T extends [
+  ...infer ExcludeLastStreamMethodParam,
+  any,
+]
+  ? ExcludeLastStreamMethodParam
   : any[];
-type ExtractGeneric<Type> = Type extends StreamCallback<infer Target>
+
+export type ExtractStreamCallbackType<Type> = Type extends StreamCallback<
+  infer Target
+>
   ? Target
   : never;
 
 export async function promisifyStream<
   Method extends (...params: any[]) => any,
-  Data = ExtractGeneric<Parameters<Method>[1]>,
->(method: Method, ...params: ExcludeLast<Parameters<Method>>) {
+  Data = ExtractStreamCallbackType<Parameters<Method>[1]>,
+>(method: Method, ...params: ExcludeLastStreamMethodParam<Parameters<Method>>) {
   return new Promise<Data>(resolve =>
     method(...params, ({data, unstream}: StreamResult<Data>) => {
       unstream();
