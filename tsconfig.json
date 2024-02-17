@@ -8,8 +8,10 @@
     "skipLibCheck": true
   },
   "include": [
+    "schema/**/*.ts",
     "app/**/*.ts",
     "common/**/*.ts",
+    "content/**/*.ts",
     "crypto/**/*.ts",
     "fetch/**/*.ts",
     "localstorage/**/*.ts",
@@ -17,5 +19,19 @@
     "src/**/*.ts",
     "test/**/*.ts",
     "public-api.ts"
-  ]
+  ],
+  "typedocOptions": {
+    "entryPoints": [
+      "schema/index.ts",
+      "app/index.ts",
+      "common/index.ts",
+      "content/index.ts",
+      "crypto/index.ts",
+      "fetch/index.ts",
+      "localstorage/index.ts",
+      "gun/index.ts"
+    ],
+    "out": "www",
+    "exclude": ["test"]
+  }
 }

@@ -1,5 +1,5 @@
 import {GunOptions} from 'gun';
-import gun from 'gun/gun';
+import Gun from 'gun/gun';
 import 'gun/lib/radix';
 import 'gun/lib/radisk';
 import 'gun/lib/store';
@@ -11,8 +11,8 @@ export type GunLink = GunResult<{'#': string}>;
 
 export type CreateGunInstance = typeof createGunInstance;
 
-export function createGunInstance(options?: GunOptions) {
-  const GUN = gun(
+export function createGunInstance(root: string, options?: GunOptions) {
+  const gun = Gun(
     options || {
       localStorage: false,
       peers: [
@@ -23,9 +23,9 @@ export function createGunInstance(options?: GunOptions) {
       ],
     }
   );
-  const GUN_USER = GUN.user();
-  const SEA = gun.SEA;
-  return {GUN, GUN_USER, SEA};
+  const gunUser = gun.user();
+  const sea = Gun.SEA;
+  return {gun, gunUser, sea, root};
 }
 
 export default createGunInstance;

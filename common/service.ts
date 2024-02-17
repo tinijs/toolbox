@@ -8,6 +8,7 @@ import {retry} from './helpers/retry';
 import {debounce} from './helpers/debounce';
 import {once} from './helpers/once';
 import {deduplicateCallback} from './helpers/deduplicate-callback';
+import {transliterate} from './helpers/transliterate';
 
 export class CommonService {
   binaryToHex = binaryToHex;
@@ -20,6 +21,7 @@ export class CommonService {
   debounce = debounce;
   once = once;
   deduplicateCallback = deduplicateCallback;
+  transliterate = transliterate;
 }
 
 export default CommonService;

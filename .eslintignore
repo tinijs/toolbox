@@ -1,5 +1,7 @@
+schema/**/*.js
 app/**/*.js
 common/**/*.js
+content/**/*.js
 crypto/**/*.js
 fetch/**/*.js
 gun/**/*.js

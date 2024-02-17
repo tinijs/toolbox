@@ -1,9 +1,13 @@
-import {IGunInstance, IGunChain, IGunOnEvent} from 'gun';
+import {IGunChain, IGunOnEvent} from 'gun';
 
 import {retry} from '../../common/helpers/retry';
 import {deduplicateCallback} from '../../common/helpers/deduplicate-callback';
 import {importRSAPublicKey} from '../../crypto/helpers/import-rsa-public-key';
-import {GunResult, GunLink} from '../helpers/create-gun-instance';
+import {
+  GunResult,
+  GunLink,
+  createGunInstance,
+} from '../helpers/create-gun-instance';
 import {extractKeys} from '../helpers/extract-keys';
 import {
   StreamContextEntry,
@@ -36,22 +40,12 @@ export type User = Pick<
 export type EditableProfile = Partial<Pick<User, 'avatar'>>;
 
 export class UserService {
-  private gun?: IGunInstance<any>;
-
   readonly TOP_NODE_NAME = '#users';
-  private readonly ERRORS = {
-    NO_INIT: new Error('Missing the context, please init() first!'),
-  };
 
-  constructor() {}
-
-  init(GUN: IGunInstance<any>) {
-    this.gun = GUN;
-  }
+  constructor(readonly gunInstance: ReturnType<typeof createGunInstance>) {}
 
   get GUN() {
-    if (!this.gun) throw this.ERRORS.NO_INIT;
-    return this.gun;
+    return this.gunInstance.gun;
   }
 
   get usersChain() {

@@ -11,8 +11,10 @@
   "main": "public-api.js",
   "types": "public-api.d.ts",
   "files": [
+    "schema",
     "app",
     "common",
+    "content",
     "crypto",
     "fetch",
     "localstorage",
@@ -44,6 +46,9 @@
     "tinijs": "^0.16.0"
   },
   "dependencies": {
+    "@sindresorhus/slugify": "^2.2.1",
+    "@sindresorhus/transliterate": "^1.6.0",
+    "flexsearch": "^0.7.43",
     "gun": "^0.2020.1239",
     "localforage": "^1.10.0",
     "share-api-polyfill": "^1.1.1"
@@ -51,6 +56,7 @@
   "devDependencies": {
     "@types/node": "^20.9.4",
     "gts": "^5.2.0",
+    "typedoc": "^0.25.7",
     "typescript": "~5.3.2"
   }
 }
