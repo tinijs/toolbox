@@ -25,7 +25,7 @@ export default {
 - Register the providers in `app.ts`
 
 ```ts
-import providers from './providers';
+import providers from './providers.js';
 
 @App({providers})
 export class AppRoot extends TiniComponent {}

@@ -1,4 +1,4 @@
-import {extractEntries} from './extract-entries';
+import {extractEntries} from './extract-entries.js';
 
 export type ExtractKeys = typeof extractKeys;
 

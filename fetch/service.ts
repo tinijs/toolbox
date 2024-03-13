@@ -1,4 +1,4 @@
-import {fetchx, Method, Input, Body, Options} from './helpers/fetch';
+import {fetchx, Method, Input, Body, Options} from './helpers/fetch.js';
 
 export class FetchService {
   private globalHeaders: Record<string, string> = {};

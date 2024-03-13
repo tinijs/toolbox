@@ -12,7 +12,7 @@ import {
   Authors,
   Categories,
   Tags,
-} from './common';
+} from './common.js';
 
 export type PostLite = Omit<Post, 'content'>;
 

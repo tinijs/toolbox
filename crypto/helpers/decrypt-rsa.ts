@@ -1,6 +1,6 @@
-import {base64ToBinary} from '../../common/helpers/base64-to-binary';
-import {binaryToText} from '../../common/helpers/binary-to-text';
-import {RSA_ALGORITHM} from './generate-rsa-keys';
+import {base64ToBinary} from '../../common/helpers/base64-to-binary.js';
+import {binaryToText} from '../../common/helpers/binary-to-text.js';
+import {RSA_ALGORITHM} from './generate-rsa-keys.js';
 
 export type DecryptRSA = typeof decryptRSA;
 

@@ -7,7 +7,7 @@ import {
   Created,
   Thumbnail,
   Content,
-} from './common';
+} from './common.js';
 
 export type CategoryLite = Omit<Category, 'content'>;
 

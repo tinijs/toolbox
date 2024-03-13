@@ -1,5 +1,5 @@
-export * from './helpers/init-theme';
-export * from './helpers/change-theme';
-export * from './helpers/share';
+export * from './helpers/init-theme.js';
+export * from './helpers/change-theme.js';
+export * from './helpers/share.js';
 
-export * from './service';
+export * from './service.js';

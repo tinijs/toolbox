@@ -1,4 +1,4 @@
-import {HashEncoding, sha256} from '../../crypto/helpers/sha-256';
+import {HashEncoding, sha256} from '../../crypto/helpers/sha-256.js';
 
 export type DeduplicateCallback = typeof deduplicateCallback;
 

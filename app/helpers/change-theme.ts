@@ -1,6 +1,6 @@
-import {setTheme} from 'tinijs';
+import {setTheme} from '@tinijs/core';
 
-import {THEME_LOCAL_STORAGE_KEY} from './init-theme';
+import {THEME_LOCAL_STORAGE_KEY} from './init-theme.js';
 
 export type ChangeTheme = typeof changeTheme;
 

@@ -1,15 +1,15 @@
-import {sha256} from '../../crypto/helpers/sha-256';
-import {hmac} from '../../crypto/helpers/hmac';
-import {generateRSAKeys} from '../../crypto/helpers/generate-rsa-keys';
-import {encryptRSA} from '../../crypto/helpers/encrypt-rsa';
-import {decryptRSA} from '../../crypto/helpers/decrypt-rsa';
-import {createGunInstance} from '../helpers/create-gun-instance';
-import {StreamCallback} from '../helpers/create-stream';
-import {emitStaticValue} from '../helpers/emit-static-value';
-import {setValue} from '../helpers/set-value';
-import {setValues} from '../helpers/set-values';
+import {sha256} from '../../crypto/helpers/sha-256.js';
+import {hmac} from '../../crypto/helpers/hmac.js';
+import {generateRSAKeys} from '../../crypto/helpers/generate-rsa-keys.js';
+import {encryptRSA} from '../../crypto/helpers/encrypt-rsa.js';
+import {decryptRSA} from '../../crypto/helpers/decrypt-rsa.js';
+import {createGunInstance} from '../helpers/create-gun-instance.js';
+import {StreamCallback} from '../helpers/create-stream.js';
+import {emitStaticValue} from '../helpers/emit-static-value.js';
+import {setValue} from '../helpers/set-value.js';
+import {setValues} from '../helpers/set-values.js';
 
-import {UserService, User, EditableProfile} from './user';
+import {UserService, User, EditableProfile} from './user.js';
 
 export class AuthService {
   private readonly ERRORS = {

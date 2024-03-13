@@ -2,11 +2,11 @@
 import Index from 'flexsearch/dist/module/index';
 import {IndexSearchResult} from 'flexsearch';
 
-import {transliterate} from '../common/helpers/transliterate';
-import {slugify} from './helpers/slugify';
-import {parseDenorm} from './helpers/parse-denorm';
-import {parseDenormList} from './helpers/parse-denorm-list';
-import {ContentInstance} from './helpers/create-content-instance';
+import {transliterate} from '../common/helpers/transliterate.js';
+import {slugify} from './helpers/slugify.js';
+import {parseDenorm} from './helpers/parse-denorm.js';
+import {parseDenormList} from './helpers/parse-denorm-list.js';
+import {ContentInstance} from './helpers/create-content-instance.js';
 
 export class ContentService<Lite, Full> {
   slugify = slugify;

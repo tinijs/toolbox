@@ -1,6 +1,6 @@
-export * from './helpers/slugify';
-export * from './helpers/parse-denorm';
-export * from './helpers/parse-denorm-list';
-export * from './helpers/create-content-instance';
+export * from './helpers/slugify.js';
+export * from './helpers/parse-denorm.js';
+export * from './helpers/parse-denorm-list.js';
+export * from './helpers/create-content-instance.js';
 
-export * from './service';
+export * from './service.js';

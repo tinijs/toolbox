@@ -1,24 +1,15 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "moduleResolution": "node",
     "experimentalDecorators": true,
     "skipLibCheck": true
   },
   "include": [
-    "schema/**/*.ts",
-    "app/**/*.ts",
-    "common/**/*.ts",
-    "content/**/*.ts",
-    "crypto/**/*.ts",
-    "fetch/**/*.ts",
-    "localstorage/**/*.ts",
-    "gun/**/*.ts",
-    "src/**/*.ts",
-    "test/**/*.ts",
-    "public-api.ts"
+    "**/*.ts"
   ],
   "typedocOptions": {
     "entryPoints": [

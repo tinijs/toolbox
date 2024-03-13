@@ -1,4 +1,4 @@
-import {Id, Slug, Status, Name, Desc, Created, Url, Content} from './common';
+import {Id, Slug, Status, Name, Desc, Created, Url, Content} from './common.js';
 
 export type AuthorLite = Omit<Author, 'content'>;
 

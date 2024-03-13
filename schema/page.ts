@@ -9,7 +9,7 @@ import {
   Thumbnail,
   Image,
   Content,
-} from './common';
+} from './common.js';
 
 export type PageLite = Omit<Page, 'content'>;
 

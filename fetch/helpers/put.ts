@@ -1,4 +1,4 @@
-import {fetchx, Input, Options, AdditionalOptions} from './fetch';
+import {fetchx, Input, Options, AdditionalOptions} from './fetch.js';
 
 export type Put = typeof put;
 

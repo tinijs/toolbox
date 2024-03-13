@@ -1,5 +1,5 @@
-import {GunOptions} from 'gun';
-import Gun from 'gun/gun';
+import {IGun, GunOptions} from 'gun';
+import Gun from 'gun/gun.js';
 import 'gun/lib/radix';
 import 'gun/lib/radisk';
 import 'gun/lib/store';
@@ -12,7 +12,7 @@ export type GunLink = GunResult<{'#': string}>;
 export type CreateGunInstance = typeof createGunInstance;
 
 export function createGunInstance(root: string, options?: GunOptions) {
-  const gun = Gun(
+  const gun = (Gun as unknown as IGun)(
     options || {
       localStorage: false,
       peers: [
@@ -24,7 +24,7 @@ export function createGunInstance(root: string, options?: GunOptions) {
     }
   );
   const gunUser = gun.user();
-  const sea = Gun.SEA;
+  const sea = (Gun as unknown as IGun).SEA;
   return {gun, gunUser, sea, root};
 }
 

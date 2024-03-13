@@ -1,8 +1,8 @@
-import {textToBinary} from '../../common/helpers/text-to-binary';
-import {binaryToText} from '../../common/helpers/binary-to-text';
-import {binaryToHex} from '../../common/helpers/binary-to-hex';
-import {binaryToBase64} from '../../common/helpers/binary-to-base64';
-import {HashEncoding} from './sha-256';
+import {textToBinary} from '../../common/helpers/text-to-binary.js';
+import {binaryToText} from '../../common/helpers/binary-to-text.js';
+import {binaryToHex} from '../../common/helpers/binary-to-hex.js';
+import {binaryToBase64} from '../../common/helpers/binary-to-base64.js';
+import {HashEncoding} from './sha-256.js';
 
 export const HMAC_ALGORITHM: HmacKeyGenParams = {name: 'HMAC', hash: 'SHA-256'};
 

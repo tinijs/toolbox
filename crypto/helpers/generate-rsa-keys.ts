@@ -1,4 +1,4 @@
-import {binaryToBase64} from '../../common/helpers/binary-to-base64';
+import {binaryToBase64} from '../../common/helpers/binary-to-base64.js';
 
 export const RSA_ALGORITHM: RsaHashedKeyGenParams = {
   name: 'RSA-OAEP',

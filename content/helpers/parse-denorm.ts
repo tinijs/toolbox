@@ -1,4 +1,4 @@
-import {slugify} from './slugify';
+import {slugify} from './slugify.js';
 
 export type ParseDenorm = typeof parseDenorm;
 

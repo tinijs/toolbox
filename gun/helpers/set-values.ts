@@ -1,7 +1,7 @@
 import {IGunChain} from 'gun';
 
-import {retry} from '../../common/helpers/retry';
-import {setValue} from './set-value';
+import {retry} from '../../common/helpers/retry.js';
+import {setValue} from './set-value.js';
 
 export type SetValues = typeof setValues;
 

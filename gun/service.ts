@@ -1,15 +1,15 @@
-import {createGunInstance} from './helpers/create-gun-instance';
-import {initUserActions} from './helpers/init-user-actions';
-import {extractEntries} from './helpers/extract-entries';
-import {extractKeys} from './helpers/extract-keys';
-import {extractValues} from './helpers/extract-values';
-import {putValue} from './helpers/put-value';
-import {setValue} from './helpers/set-value';
-import {setValues} from './helpers/set-values';
-import {createStream} from './helpers/create-stream';
-import {promisifyStream} from './helpers/promisify-stream';
-import {emitStaticValue} from './helpers/emit-static-value';
-import {emitStreamValue} from './helpers/emit-stream-value';
+import {createGunInstance} from './helpers/create-gun-instance.js';
+import {initUserActions} from './helpers/init-user-actions.js';
+import {extractEntries} from './helpers/extract-entries.js';
+import {extractKeys} from './helpers/extract-keys.js';
+import {extractValues} from './helpers/extract-values.js';
+import {putValue} from './helpers/put-value.js';
+import {setValue} from './helpers/set-value.js';
+import {setValues} from './helpers/set-values.js';
+import {createStream} from './helpers/create-stream.js';
+import {promisifyStream} from './helpers/promisify-stream.js';
+import {emitStaticValue} from './helpers/emit-static-value.js';
+import {emitStreamValue} from './helpers/emit-stream-value.js';
 
 export class GunService {
   createGunInstance = createGunInstance;

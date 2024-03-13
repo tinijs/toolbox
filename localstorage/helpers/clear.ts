@@ -1,4 +1,4 @@
-import {LocalForage} from './create-local-forage';
+import {LocalForage} from './create-local-forage.js';
 
 export type Clear = typeof clear;
 

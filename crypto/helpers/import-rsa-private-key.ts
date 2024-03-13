@@ -1,5 +1,5 @@
-import {base64ToBinary} from '../../common/helpers/base64-to-binary';
-import {RSA_ALGORITHM} from './generate-rsa-keys';
+import {base64ToBinary} from '../../common/helpers/base64-to-binary.js';
+import {RSA_ALGORITHM} from './generate-rsa-keys.js';
 
 export type ImportRSAPrivateKey = typeof importRSAPrivateKey;
 

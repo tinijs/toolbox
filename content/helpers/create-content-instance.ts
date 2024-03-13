@@ -1,4 +1,4 @@
-import {get} from '../../fetch/helpers/get';
+import {get} from '../../fetch/helpers/get.js';
 
 export type CreateContentInstance = typeof createContentInstance;
 

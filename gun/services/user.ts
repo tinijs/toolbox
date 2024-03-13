@@ -1,14 +1,14 @@
 import {IGunChain, IGunOnEvent} from 'gun';
 
-import {retry} from '../../common/helpers/retry';
-import {deduplicateCallback} from '../../common/helpers/deduplicate-callback';
-import {importRSAPublicKey} from '../../crypto/helpers/import-rsa-public-key';
+import {retry} from '../../common/helpers/retry.js';
+import {deduplicateCallback} from '../../common/helpers/deduplicate-callback.js';
+import {importRSAPublicKey} from '../../crypto/helpers/import-rsa-public-key.js';
 import {
   GunResult,
   GunLink,
   createGunInstance,
-} from '../helpers/create-gun-instance';
-import {extractKeys} from '../helpers/extract-keys';
+} from '../helpers/create-gun-instance.js';
+import {extractKeys} from '../helpers/extract-keys.js';
 import {
   StreamContextEntry,
   StreamContext,
@@ -16,7 +16,7 @@ import {
   StreamOptions,
   createStream,
   Stream,
-} from '../helpers/create-stream';
+} from '../helpers/create-stream.js';
 
 export interface UserNode {
   alias: string;

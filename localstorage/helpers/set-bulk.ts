@@ -1,5 +1,5 @@
-import {LocalForage} from './create-local-forage';
-import set from './set';
+import {LocalForage} from './create-local-forage.js';
+import set from './set.js';
 
 export type SetBulk = typeof setBulk;
 

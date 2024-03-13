@@ -1,4 +1,4 @@
-import {setTheme} from 'tinijs';
+import {setTheme} from '@tinijs/core';
 
 export const THEME_LOCAL_STORAGE_KEY = 'theme';
 
