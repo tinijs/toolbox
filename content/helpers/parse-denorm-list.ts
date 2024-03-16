@@ -1,4 +1,4 @@
-import {DenormList} from '../../schema/index.js';
+import {DenormList} from '../../schema/common.js';
 import {parseDenorm} from './parse-denorm.js';
 
 export type ParseDenormList = typeof parseDenormList;

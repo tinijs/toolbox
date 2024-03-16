@@ -1,15 +1,20 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
     "target": "ESNext",
+    "module": "NodeNext",
     "lib": ["DOM", "ESNext"],
+    "outDir": "dist",
     "experimentalDecorators": true,
     "skipLibCheck": true
   },
   "include": [
-    "**/*.ts"
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "www"
   ],
   "typedocOptions": {
     "entryPoints": [
@@ -22,7 +27,6 @@
       "localstorage/index.ts",
       "gun/index.ts"
     ],
-    "out": "www",
-    "exclude": ["test"]
+    "out": "www"
   }
 }
