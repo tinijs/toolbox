@@ -1,14 +1,19 @@
 # TiniJS Toolbox
 
+> [!IMPORTANT]
+> This previously experiment is wrapped up, moving forward the development will happen at <https://github.com/tinijs/tinijs/tree/main/packages/toolbox>.
+>
+> If you want to use the experimental version still, please use the version `0.16.0`.
+
 Useful services, helpers, ... for using in TiniJS apps.
 
 ## Install
 
-To install the module: `npm i @tinijs/toolbox`
+To install the module: `npm i @tinijs/toolbox@0.16.0`
 
 It is recommended to download the [Skeleton](https://github.com/tinijs/skeleton) for a ready-to-use structured project.
 
-For more, please visit: <https://tinijs.dev> (TODO)
+For more, please visit: <https://tinijs.dev>
 
 ## Usage
 
