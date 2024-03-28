@@ -1,5 +1,8 @@
 # TiniJS Toolbox
 
+> [!IMPORTANT]
+> This previously experiment is wrapped up, moving forward the development will happen at <https://github.com/tinijs/tinijs/tree/main/packages/toolbox>.
+
 Useful services, helpers, ... for using in TiniJS apps.
 
 ## Install
